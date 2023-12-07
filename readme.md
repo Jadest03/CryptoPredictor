@@ -1,4 +1,4 @@
-# 코인 예측 프로그램
+# <center>코인 예측 프로그램 </center>
 
 ![Alt text](/logo.png "Logo")
 
