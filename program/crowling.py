@@ -17,11 +17,12 @@ def get_coin_name():
     else:
         return None
 
-def data_crowling():
+def data_crowling(input_received_event):
     input_value = get_coin_name()
 
     if input_value is None:
         print("Coin name not provided. Exiting.")
+        input_received_event.set() 
         return
 
     chrome_options = Options()
@@ -57,6 +58,7 @@ def data_crowling():
     else:  # 파일이 없다면 헤더 포함
         df[3].to_csv(file_name, encoding='utf-8-sig', index=False, header=['Percentage'])
 
+    input_received_event.set()
     print("크롤링 시작")
     with open(file_name, 'a') as f:
         while True:

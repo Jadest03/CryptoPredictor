@@ -1,15 +1,16 @@
 # predictor.py
 import sys
-from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QVBoxLayout, QWidget, QLabel
 from PyQt5.QtCore import Qt
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from sklearn.preprocessing import MinMaxScaler
 import matplotlib.pyplot as plt
-from matplotlib.figure import Figure
+from statsmodels.tsa.arima.model import ARIMA
 import matplotlib.animation as animation
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.preprocessing import MinMaxScaler
 from datetime import datetime, timedelta
+import warnings
+warnings.filterwarnings("ignore")
 
 class CoinPredictorApp(QMainWindow):
     def __init__(self):
@@ -25,15 +26,23 @@ class CoinPredictorApp(QMainWindow):
         self.X = self.df[['Price_Rise']]
         self.y = self.df['Price_Rise']
 
+        self.df['Numeric_Percentage'] = self.df['Percentage'].apply(lambda x: float(x.strip('%').replace('+', '')))
+
         # Matplotlib figure
         self.fig, self.ax = plt.subplots()
         self.canvas = FigureCanvas(self.fig)
         self.setCentralWidget(QWidget(self))
         layout = QVBoxLayout(self.centralWidget())
         layout.addWidget(self.canvas)
+        self.prediction_label = QLabel(self)
+        layout.addWidget(self.prediction_label)
+        self.info_label = QLabel(self)
+        layout.addWidget(self.info_label)
+
+        self.prediction_interval = 3
 
         # Real-time prediction function
-        self.ani = animation.FuncAnimation(self.fig, self.update_plot, blit=False)
+        self.ani = animation.FuncAnimation(self.fig, self.update_plot, blit=False, cache_frame_data=False)
 
         self.setWindowTitle("Coin Predictor")
         self.setGeometry(100, 100, 800, 600)
@@ -53,7 +62,7 @@ class CoinPredictorApp(QMainWindow):
         df = pd.read_csv('coin.csv')
 
         # Current date and time plus 1 second
-        current_date = datetime.now() + timedelta(seconds=1)
+        current_date = datetime.now()
 
         # Get the new Percentage value from coin.csv
         new_percentage = df['Percentage'].iloc[-1]
@@ -69,10 +78,6 @@ class CoinPredictorApp(QMainWindow):
         scaler = MinMaxScaler()
         X_scaled = scaler.fit_transform(self.X)
 
-        # Machine Learning model
-        model = RandomForestRegressor(n_estimators=100, random_state=42)
-        model.fit(X_scaled, self.y)
-
         # Create new data
         new_data = pd.DataFrame({'Date': [current_date], 'Percentage': [new_percentage]})
         new_data['Price_Rise'] = new_data['Percentage'].apply(lambda x: float(x.strip('%').replace('+', '')))
@@ -82,19 +87,46 @@ class CoinPredictorApp(QMainWindow):
 
         # Check if new_data is not empty and does not have all NA values
         if not new_data.empty and not new_data.isna().all().all():
+            # Check if 'Numeric_Percentage' column exists, create it if not
+            if 'Numeric_Percentage' not in self.df.columns:
+                self.df['Numeric_Percentage'] = self.df['Percentage'].apply(lambda x: float(x.strip('%').replace('+', '')))
+
+            # Build ARIMA model
+            p, d, q = 3,1,3  # Replace with appropriate ARIMA parameters
+            model = ARIMA(self.df['Numeric_Percentage'].dropna(), order=(p, d, q))
+            fit_model = model.fit()
+
             # Perform prediction
-            X_new = new_data[['Price_Rise']]  # Use only the latest data point for prediction
-            X_new_scaled = scaler.transform(X_new)
-            prediction = model.predict(X_new_scaled)
+            forecast = fit_model.forecast(steps=1)
 
             # Update the graph with actual Percentage values and predictions
             self.ax.clear()
-            # Extract numeric values without percentage signs for plotting
             self.df['Numeric_Percentage'] = self.df['Percentage'].apply(lambda x: float(x.strip('%').replace('+', '')))
-            self.ax.plot(self.df['Date'], self.df['Numeric_Percentage'], label='actual')  # Plot actual numeric values
-            self.ax.scatter(current_date, prediction, color='red', label='predict')  # Mark the prediction
+            self.ax.plot(self.df['Date'], self.df['Numeric_Percentage'], label='actual')
+
+            # Plot the current date
+            self.ax.axvline(current_date, color='blue', linestyle='--', label='current')
+
+            # Plot the forecasted date (current date + prediction_interval)
+            forecasted_date = current_date + timedelta(seconds=self.prediction_interval)
+            self.ax.axvline(forecasted_date, color='green', linestyle='--', label='3s later')
+
+            self.ax.scatter(forecasted_date, forecast, color='red', label='predict')
+
             self.ax.legend()
             self.ax.set_title('Crypto growth rate Predictor')
+            self.info_label.setText(f'Current growth rate: {self.df["Numeric_Percentage"].iloc[-1]:.2f}')
+
+            # Check if forecast value is greater or smaller than the current growth rate
+            # Check if forecast value is greater or smaller than the current growth rate
+            if forecast.iloc[0] > self.df["Numeric_Percentage"].iloc[-1]:
+                # Display "Sell 3 sec later" if forecast is greater
+                self.prediction_label.setText(f'<font color="red">3 sec later Prediction: {forecast.iloc[0]:.2f} - Sell 3 sec later</font>')
+            else:
+                # Remove "Sell 3 sec later" if forecast is smaller
+                self.prediction_label.setText(f'3 sec later Prediction: {forecast.iloc[0]:.2f}')
+
+
 
 def start_predictor():
     app = QApplication(sys.argv)
@@ -103,18 +135,7 @@ def start_predictor():
     # Apply global style sheet
     app.setStyleSheet("""
         QWidget {
-            background-color: #f0f0f0;
-        }
-        QPushButton {
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            padding: 8px;
-            font-size: 14px;
-        }
-        QPushButton:hover {
-            background-color: #45a049;
+            background-color: white;
         }
         """)
 
@@ -124,13 +145,3 @@ def start_predictor():
 
 if __name__ == "__main__":
     start_predictor()
-
-
-
-
-
-
-
-
-
-
