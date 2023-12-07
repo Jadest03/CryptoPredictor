@@ -1,4 +1,4 @@
-# <center>코인 예측 프로그램 </center>
+# <p align="center">코인 예측 프로그램</p>
 
 ![Alt text](/logo.png "Logo")
 
