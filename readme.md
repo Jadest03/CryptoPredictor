@@ -1,6 +1,8 @@
 # <p align="center">코인 예측 프로그램</p>
 
-<p align="center">![Alt text](/logo.png "Logo")</p>
+<p align="center">
+  <img src="/logo.png" alt="logo">
+</p>
 
 # 개요
 
