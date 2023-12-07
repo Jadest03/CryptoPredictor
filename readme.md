@@ -45,8 +45,7 @@ python main.py
 
 # 크레딧
 
-개발자: 당신의 이름
-연락처: your.email@example.com
+개발자 이메일: jadest1018@gmail.com
 
 # 라이선스
 
