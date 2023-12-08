@@ -28,6 +28,8 @@
 
 # <p align="center">실행방법</p>
 
+<p align="center">
+
 프로그램 파일 가져오기<br/>
 `git clone https://github.com/Jadest03/CryptoPredictor`
 
@@ -36,15 +38,19 @@
 
 프로그램 실행<br/>
 `절대경로/CryptoPredictor/program/thread.py`
-
 <br/><br/>
 
+</p>
+
 # <p align="center">실행 후</p>
+
+<p align="center">
 
 1. 프로그램 실행 시 입력 GUI가 표시됩니다.
 2. 예측 하고 싶은 가상화폐의 정확한 이름을 작성합니다.
 3. 그래프 GUI를 통해 값을 확인하고 예측 값을 확인합니다.
-   <br/><br/>
+<br/><br/>
+</p>
 
 # <p align="center">스크린샷</p>
 
@@ -54,9 +60,13 @@
 
 # <p align="center">크레딧</p>
 
+<p align="center">
+
 ✨ 문의 사항이나 궁금한 점에 대해서는 아래 메일로 연락주세요 😄<br/>
 ✨ 개발자 이메일: jadest1018@gmail.com
 <br/><br/>
+
+</p>
 
 # <p align="center">라이센스</p>
 
