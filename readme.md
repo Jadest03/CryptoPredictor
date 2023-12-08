@@ -47,7 +47,20 @@
 
 # <p align="center">스크린샷</p>
 
-코인 예측기 스크린샷
+입력
+
+<p align="center">
+  <img src="/imgs/input1.png" alt="input">
+</p>
+
+<p align="center">
+  <img src="/imgs/input2.png" alt="input">
+</p>
+그래프
+
+<p align="center">
+  <img src="/imgs/graph1.png" alt="graph">
+</p>
 
 <br/><br/>
 
