@@ -59,12 +59,9 @@
 
 # <p align="center">크레딧</p>
 
-<p align="center">
-
-✨ 문의 사항이나 궁금한 점에 대해서는 아래 메일로 연락주세요 😄<br/>
-✨ 개발자 이메일: jadest1018@gmail.com
-<br/><br/>
-
+<p align="center">✨ 문의 사항이나 궁금한 점에 대해서는 아래 메일로 연락주세요 😄<br/>
+    ✨ 개발자 이메일: jadest1018@gmail.com
+    <br/><br/>
 </p>
 
 # <p align="center">라이센스</p>
