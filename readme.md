@@ -47,16 +47,18 @@
 
 # <p align="center">스크린샷</p>
 
-입력
+## <p align="center">입력</p>
 
 <p align="center">
   <img src="/imgs/input1.png" alt="input">
 </p>
-
+<br/>
 <p align="center">
   <img src="/imgs/input2.png" alt="input">
 </p>
-그래프
+<br/><br/>
+
+## <p align="center">그래프</p>
 
 <p align="center">
   <img src="/imgs/graph1.png" alt="graph">
