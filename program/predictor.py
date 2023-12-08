@@ -121,7 +121,7 @@ class CoinPredictorApp(QMainWindow):
             # Check if forecast value is greater or smaller than the current growth rate
             if forecast.iloc[0] > self.df["Numeric_Percentage"].iloc[-1]:
                 # Display "Sell 3 sec later" if forecast is greater
-                self.prediction_label.setText(f'<font color="red">3 sec later Prediction: {forecast.iloc[0]:.2f} - Sell 3 sec later</font>')
+                self.prediction_label.setText(f'<font color="red">3 sec later Prediction: {forecast.iloc[0]:.2f}</font>')
             else:
                 # Remove "Sell 3 sec later" if forecast is smaller
                 self.prediction_label.setText(f'3 sec later Prediction: {forecast.iloc[0]:.2f}')
