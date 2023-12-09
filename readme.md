@@ -29,14 +29,25 @@
 
 # <p align="center">실행방법</p>
 
+다음과 같은 순서로 프로그램을 실행 가능합니다.
+
 프로그램 파일 가져오기<br/>
 `git clone https://github.com/Jadest03/CryptoPredictor`
 
-실행하는데 필요한 라이브러리 설치(가상환경 추천)<br/>
+파이썬 가상환경 설치<br/>
+`python -m venv myenv`
+
+설치한 가상환경 실행<br/>
+`.\myenv\Scripts\activate`
+
+pip 최신버전 업그레이드<br/>
+`python -m pip install --upgrade pip`
+
+실행하는데 필요한 라이브러리 설치<br/>
 `pip install -r requirements.txt`
 
 프로그램 실행<br/>
-`절대경로/CryptoPredictor/program/thread.py`
+`절대경로/CryptoPredictor-main/program/thread.py`
 <br/><br/>
 
 # <p align="center">실행 후</p>
