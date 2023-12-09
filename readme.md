@@ -34,7 +34,7 @@
 프로그램 파일 가져오기<br/>
 `git clone https://github.com/Jadest03/CryptoPredictor`
 
-파이썬 가상환경 설치<br/>
+다운받은 폴더에 파이썬 가상환경 설치<br/>
 `python -m venv myenv`
 
 설치한 가상환경 실행<br/>
