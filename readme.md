@@ -87,4 +87,4 @@ pip 최신버전 업그레이드<br/>
 
 # <p align="center">라이센스</p>
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이 프로젝트는 MIT LICENSE에 따라 라이센스가 부여됩니다. 자세한 내용은 [라이센스](LICENSE.md)를 참조해주세요. <br/><br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;이 프로젝트는 MIT LICENSE에 따라 라이센스가 부여됩니다. 자세한 내용은 [라이센스](LICENSE.md)를 참조해주세요. <br/><br/><br/>
