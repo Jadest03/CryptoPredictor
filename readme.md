@@ -76,4 +76,4 @@
 
 # <p align="center">라이센스</p>
 
-이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다. 자세한 내용은 LICENSE 파일을 참조하십시오. <br/><br/><br/>
+이 프로젝트는 [MIT LICENSE](LICENSE.md)에 따라 라이선스가 부여됩니다. 자세한 내용은 [라이선스 파일](LICENSE.md)을 참조해주세요 <br/><br/><br/>
